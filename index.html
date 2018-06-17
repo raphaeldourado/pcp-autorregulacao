@@ -3,7 +3,7 @@
 		<meta charset="utf-8">
 		<title>PCP</title>
 		<script src="https://d3js.org/d3.v3.min.js"></script>
-		<script src='https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.min.js'></script> 
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
 		
 		<script src="grafico.js"></script>
 
@@ -170,7 +170,10 @@
 			</article>
 		</section>
 		
-
+		<div class="legend-row" id="legend-div" style="display: none;">
+			<div class="legend-column" style="color: red; text-align: right"><p>──────── Aluno COM risco de reprovação&nbsp;&nbsp;&nbsp;&nbsp;</p></div>
+			<div class="legend-column" style="color: steelblue;"><p>──────── Aluno SEM risco de reprovação&nbsp;&nbsp;&nbsp;&nbsp;</p></div>
+		</div> 
 		<footer>
 			--- Footer aqui ---
 		</footer>
@@ -201,6 +204,7 @@
 
 					console.log(filter_options_local);
 					drawGraph(filter_options_local);
+					document.getElementById("legend-div").style.display = "flex";					
 				} else {
 					alert("Preencha todos os campos do filtro e selecione pelo menos duas variáveis do construto.");
 				}
