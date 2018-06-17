@@ -1,0 +1,105 @@
+		* {
+			box-sizing: border-box;
+		}
+
+		header {
+			background-color: #666;
+			padding: 30px;
+			text-align: center;
+			font-size: 35px;
+			color: white;
+		}		
+
+		.nav-combos {
+			background: rgb(173, 201, 238);
+			padding: 10px;
+		}		
+		
+		article {
+			/*float: left;
+			width: 70%;*/
+			padding: 20px;
+			background-color: #f1f1f1;
+		}
+
+		.nav-vars {
+			/*float: left;
+			width: 30%; */
+			background: #ccc;
+			padding: 10px;
+		}		
+
+		.varlistLabel, .labelCombos {
+			font: 0.9em sans-serif;
+		}		
+
+		.varlistMainLabel {
+            font: 0.95em sans-serif;
+            font-weight: bold;
+		}
+
+		/* Clear floats after the columns 
+		section:after {
+			content: "";
+			display: table;
+			clear: both;
+		}*/
+
+		/* Style the footer */
+		footer {
+			background-color: #777;
+			padding: 10px;
+			text-align: center;
+			color: white;
+		}		
+
+		svg {
+		  font: 10px sans-serif;
+		}
+
+		.background path {
+		  fill: none;
+		  stroke: #ddd;
+		  shape-rendering: crispEdges;
+		}
+
+		
+		.foreground path {
+		  fill: none;
+		  /*stroke: steelblue; --sera definido com base na situacao do aluno*/
+		}
+
+		.brush .extent {
+		  fill-opacity: .3;
+		  stroke: #fff;
+		  shape-rendering: crispEdges;
+		}
+
+		.axis line,
+		.axis path {
+		  fill: none;
+		  stroke: #000;
+		  shape-rendering: crispEdges;
+		}
+
+		.axis text {
+		  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+		  cursor: move;
+		}
+
+		#simpletooltip {
+			position: absolute;
+			z-index: 10;
+			visibility: hidden;		
+
+		    padding: 2px;				
+		    font: 12px sans-serif;		
+		    background: lightsteelblue;	
+		    border: 0px;				    
+		    pointer-events: none;			
+		}
+
+		.combos-filtro {
+			margin-right: 10px;
+			max-width: 200;
+		}

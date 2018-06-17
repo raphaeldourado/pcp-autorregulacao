@@ -1,0 +1,270 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>PCP</title>
+		<script src="https://d3js.org/d3.v3.min.js"></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.min.js'></script> 
+		
+		<script src="grafico.js"></script>
+
+		<link rel="stylesheet" href="style.css">
+
+	</head>
+
+	<body>
+		<header>
+			Experimento ...
+		</header>
+
+		<nav class="nav-combos">
+			<label for="cbcurso" class="labelCombos">Curso<span class="fb-required">*</span></label>
+			<select class="combos-filtro" name="cbcurso" id="cbcurso" required="required" aria-required="true" onchange="carregarSemestres()">
+				<option disabled selected value> -- Selecione um curso -- </option>
+			</select>
+
+			<label for="cbsemestre" class="labelCombos">Semestre<span class="fb-required">*</span></label>
+			<select class="combos-filtro" name="cbsemestre" id="cbsemestre" required="required" aria-required="true" onchange="carregarPeriodos()"></select>
+
+			<label for="cbperiodo" class="labelCombos">Período<span class="fb-required">*</span></label>
+			<select class="combos-filtro" name="cbperiodo" id="cbperiodo" required="required" aria-required="true" onchange="carregarDisciplinas()"></select>
+
+			<label for="cbdisciplina" class="labelCombos">Disciplina<span class="fb-required">*</span></label>
+			<select class="combos-filtro" name="cbdisciplina" id="cbdisciplina" required="required" aria-required="true"></select>
+
+			<label for="cbconstruto" class="labelCombos">Construto<span class="fb-required">*</span></label>
+			<select class="combos-filtro" name="cbconstruto" id="cbconstruto" required="required" aria-required="true" onchange="updateVarList()">
+				<option disabled selected value> -- Selecione um construto -- </option>
+				<option value="AA" id="cbconstruto-5">Auto avaliação</option>
+				<option value="GT" id="cbconstruto-4">Busca por ajuda</option>
+				<option value="EM" id="cbconstruto-0">Estabelecimento de Metas</option>
+				<option value="ET" id="cbconstruto-2">Estratégia para realização de tarefas</option>
+				<option value="EA" id="cbconstruto-1">Estruturação do Ambiente</option>
+				<option value="BA" id="cbconstruto-3">Gerenciamento do Tempo</option>
+			</select>
+			
+			<button onclick="btFilterClick()">Visualizar</button>
+		</nav>
+
+		<nav class="nav-vars">
+			<label for="checkbox-group-1529189343772" class="varlistMainLabel">Variáveis</label>
+			<div id="divvargroup">
+				<div id="divvarlist">
+					<input name="opVAR01" id="opVAR01" class="varlistCheckbox" style="display: none;" value="VAR01" type="checkbox" checked="checked">
+					<label id="lbVAR01" class="varlistLabel" style="display: none;" for="opVAR01">VAR01 - Quantidade de diferentes locais (IP´s) a partir dos quais a(o) aluna(o) acessou o ambiente<br></label>
+		
+					<input name="opVAR02" id="opVAR02" class="varlistCheckbox" style="display: none;" value="VAR02" type="checkbox" checked="checked">
+					<label id="lbVAR02" class="varlistLabel" style="display: none;" for="opVAR02">VAR02 - Quantidade de mensagens enviadas por aluna(o) às(os) Professoras(es) pelo ambiente<br></label>
+		
+					<input name="opVAR03" id="opVAR03" class="varlistCheckbox" style="display: none;" value="VAR03" type="checkbox" checked="checked">
+					<label id="lbVAR03" class="varlistLabel" style="display: none;" for="opVAR03">VAR03 - Quantidade de mensagens enviadas por aluna(o) às(os) Tutor(es) pelo ambiente<br></label>
+		
+					<input name="opVAR04" id="opVAR04" class="varlistCheckbox" style="display: none;" value="VAR04" type="checkbox" checked="checked">
+					<label id="lbVAR04" class="varlistLabel" style="display: none;" for="opVAR04">VAR04 - Quantidade geral de mensagens enviadas pela(o) aluna(o) dentro do ambiente<br></label>
+		
+					<input name="opVAR05" id="opVAR05" class="varlistCheckbox" style="display: none;" value="VAR05" type="checkbox" checked="checked">
+					<label id="lbVAR05" class="varlistLabel" style="display: none;" for="opVAR05">VAR05 - Quantidade geral de mensagens recebidas pela(o) aluna(o) dentro do ambiente<br></label>
+		
+					<input name="opVAR06" id="opVAR06" class="varlistCheckbox" style="display: none;" value="VAR06" type="checkbox" checked="checked">
+					<label id="lbVAR06" class="varlistLabel" style="display: none;" for="opVAR06">VAR06 - Quantidade de tópicos criados pelo(a) aluno(a) em fórum do tipo "tira-dúvidas"<br></label>
+		
+					<input name="opVAR07" id="opVAR07" class="varlistCheckbox" style="display: none;" value="VAR07" type="checkbox" checked="checked">
+					<label id="lbVAR07" class="varlistLabel" style="display: none;" for="opVAR07">VAR07 - Quantidade de postagens no "Fórum tira dúvidas"<br></label>
+		
+					<input name="opVAR08" id="opVAR08" class="varlistCheckbox" style="display: none;" value="VAR08" type="checkbox" checked="checked">
+					<label id="lbVAR08" class="varlistLabel" style="display: none;" for="opVAR08">VAR08 - Quant. de postagens de um(a) aluno(a) em fóruns que foram respondidas por outros(as) alunos(as).<br></label>
+		
+					<input name="opVAR09" id="opVAR09" class="varlistCheckbox" style="display: none;" value="VAR09" type="checkbox" checked="checked">
+					<label id="lbVAR09" class="varlistLabel" style="display: none;" for="opVAR09">VAR09 - Quantidade de postagens de um(a) aluno(a) em fóruns que foram respondidas pelo(a) professor(a) ou tutor(a).<br></label>
+		
+					<input name="opVAR10" id="opVAR10" class="varlistCheckbox" style="display: none;" value="VAR10" type="checkbox" checked="checked">
+					<label id="lbVAR10" class="varlistLabel" style="display: none;" for="opVAR10">VAR10 - Quantidade de colegas diferentes para quem o(a) aluno(a) enviou mensagens dentro do ambiente.<br></label>
+		
+					<input name="opVAR12" id="opVAR12" class="varlistCheckbox" style="display: none;" value="VAR12" type="checkbox" checked="checked">
+					<label id="lbVAR12" class="varlistLabel" style="display: none;" for="opVAR12">VAR12 - Quantidade de visualizações da aba "Conteúdo" do curso, onde constam os arquivos com o conteúdo programático do curso<br></label>
+		
+					<input name="opVAR13" id="opVAR13" class="varlistCheckbox" style="display: none;" value="VAR13" type="checkbox" checked="checked">
+					<label id="lbVAR13" class="varlistLabel" style="display: none;" for="opVAR13">VAR13 - Horário que mais realizou atividades<br></label>
+		
+					<input name="opVAR14" id="opVAR14" class="varlistCheckbox" style="display: none;" value="VAR14" type="checkbox" checked="checked">
+					<label id="lbVAR14" class="varlistLabel" style="display: none;" for="opVAR14">VAR14 - Turno do dia em que realizou mais atividades<br></label>
+		
+					<input name="opVAR15" id="opVAR15" class="varlistCheckbox" style="display: none;" value="VAR15" type="checkbox" checked="checked">
+					<label id="lbVAR15" class="varlistLabel" style="display: none;" for="opVAR15">VAR15<br></label>
+		
+					<input name="opVAR16" id="opVAR16" class="varlistCheckbox" style="display: none;" value="VAR16" type="checkbox" checked="checked">
+					<label id="lbVAR16" class="varlistLabel" style="display: none;" for="opVAR16">VAR16 - Quantidade de atividades entregues por um(a) aluno(a) fora do prazo, por disciplina<br></label>
+		
+					<input name="opVAR17" id="opVAR17" class="varlistCheckbox" style="display: none;" value="VAR17" type="checkbox" checked="checked">
+					<label id="lbVAR17" class="varlistLabel" style="display: none;" for="opVAR17">VAR17 - Tempo médio entre a abertura da atividade e sua submissão<br></label>
+		
+					<input name="opVAR18" id="opVAR18" class="varlistCheckbox" style="display: none;" value="VAR18" type="checkbox" checked="checked">
+					<label id="lbVAR18" class="varlistLabel" style="display: none;" for="opVAR18">VAR18 - Quantidade de leituras feitas ao fórum (pageviews)<br></label>
+		
+					<input name="opVAR19" id="opVAR19" class="varlistCheckbox" style="display: none;" value="VAR19" type="checkbox" checked="checked">
+					<label id="lbVAR19" class="varlistLabel" style="display: none;" for="opVAR19">VAR19<br></label>
+		
+					<input name="opVAR20" id="opVAR20" class="varlistCheckbox" style="display: none;" value="VAR20" type="checkbox" checked="checked">
+					<label id="lbVAR20" class="varlistLabel" style="display: none;" for="opVAR20">VAR20 - Quantidade de respostas ao tópico principal (refazer opinião em fórum)<br></label>
+		
+					<input name="opVAR21" id="opVAR21" class="varlistCheckbox" style="display: none;" value="VAR21" type="checkbox" checked="checked">
+					<label id="lbVAR21" class="varlistLabel" style="display: none;" for="opVAR21">VAR21 - Quantidade de pageviews ao quadro de notas<br></label>
+		
+					<input name="opVAR22" id="opVAR22" class="varlistCheckbox" style="display: none;" value="VAR22" type="checkbox" checked="checked">
+					<label id="lbVAR22" class="varlistLabel" style="display: none;" for="opVAR22">VAR22 - Quantidade de vezes que o aluno visualiza o cheklist "Atividades"<br></label>
+		
+					<input name="opVAR23" id="opVAR23" class="varlistCheckbox" style="display: none;" value="VAR23" type="checkbox" checked="checked">
+					<label id="lbVAR23" class="varlistLabel" style="display: none;" for="opVAR23">VAR23 - Quantidade de visualizações de notas por atividade<br></label>
+		
+					<input name="opVAR24" id="opVAR24" class="varlistCheckbox" style="display: none;" value="VAR24" type="checkbox" checked="checked">
+					<label id="lbVAR24" class="varlistLabel" style="display: none;" for="opVAR24">VAR24 - Média semanal da quantidade de acessos de um(a) aluno(a) ao ambiente<br></label>
+		
+					<input name="opVAR25" id="opVAR25" class="varlistCheckbox" style="display: none;" value="VAR25" type="checkbox" checked="checked">
+					<label id="lbVAR25" class="varlistLabel" style="display: none;" for="opVAR25">VAR25 - Tempo médio entre a criação de um tópico no fórum temático e a primeira postagem do aluno<br></label>
+		
+					<input name="opVAR28" id="opVAR28" class="varlistCheckbox" style="display: none;" value="VAR28" type="checkbox" checked="checked">
+					<label id="lbVAR28" class="varlistLabel" style="display: none;" for="opVAR28">VAR28 - Quantidades de Time Out<br></label>
+		
+					<input name="opVAR29" id="opVAR29" class="varlistCheckbox" style="display: none;" value="VAR29" type="checkbox" checked="checked">
+					<label id="lbVAR29" class="varlistLabel" style="display: none;" for="opVAR29">VAR29<br></label>
+		
+					<input name="opVAR30" id="opVAR30" class="varlistCheckbox" style="display: none;" value="VAR30" type="checkbox" checked="checked">
+					<label id="lbVAR30" class="varlistLabel" style="display: none;" for="opVAR30">VAR30<br></label>
+		
+					<input name="opVAR31" id="opVAR31" class="varlistCheckbox" style="display: none;" value="VAR31" type="checkbox" checked="checked">
+					<label id="lbVAR31" class="varlistLabel" style="display: none;" for="opVAR31">VAR31 - Quantidade de acessos do(a) aluno(a) ao ambiente<br></label>
+		
+					<input name="opVAR31b" id="opVAR31b" class="varlistCheckbox" style="display: none;" value="VAR31b" type="checkbox" checked="checked">
+					<label id="lbVAR31b" class="varlistLabel" style="display: none;" for="opVAR31b">VAR31b - Quantidade de dias distintos que o aluno entrou na disciplina<br></label>
+		
+					<input name="opVAR31c" id="opVAR31c" class="varlistCheckbox" style="display: none;" value="VAR31c" type="checkbox" checked="checked">
+					<label id="lbVAR31c" class="varlistLabel" style="display: none;" for="opVAR31c">VAR31c - Quantidade de dias distintos que o aluno entrou na plataforma<br></label>
+		
+					<input name="opVAR32a" id="opVAR32a" class="varlistCheckbox" style="display: none;" value="VAR32a" type="checkbox" checked="checked">
+					<label id="lbVAR32a" class="varlistLabel" style="display: none;" for="opVAR32a">VAR32a - Quantidade de acessos do(a) aluno(a) ao ambiente por turno (Manhã)<br></label>
+		
+					<input name="opVAR32b" id="opVAR32b" class="varlistCheckbox" style="display: none;" value="VAR32b" type="checkbox" checked="checked">
+					<label id="lbVAR32b" class="varlistLabel" style="display: none;" for="opVAR32b">VAR32b - Quantidade de acessos do(a) aluno(a) ao ambiente por turno (Tarde)<br></label>
+		
+					<input name="opVAR32c" id="opVAR32c" class="varlistCheckbox" style="display: none;" value="VAR32c" type="checkbox" checked="checked">
+					<label id="lbVAR32c" class="varlistLabel" style="display: none;" for="opVAR32c">VAR32c - Quantidade de acessos do(a) aluno(a) ao ambiente por turno (Noite)<br></label>
+		
+					<input name="opVAR32d" id="opVAR32d" class="varlistCheckbox" style="display: none;" value="VAR32d" type="checkbox" checked="checked">
+					<label id="lbVAR32d" class="varlistLabel" style="display: none;" for="opVAR32d">VAR32d - Quantidade de acessos do(a) aluno(a) ao ambiente por turno (Madrugada)<br></label>
+		
+					<input name="opVAR33" id="opVAR33" class="varlistCheckbox" style="display: none;" value="VAR33" type="checkbox" checked="checked">
+					<label id="lbVAR33" class="varlistLabel" style="display: none;" for="opVAR33">VAR33 - Quantidade de atividades entregues por um(a) aluno(a) no prazo, por disciplina<br></label>
+		
+					<input name="opVAR34" id="opVAR34" class="varlistCheckbox" style="display: none;" value="VAR34" type="checkbox" checked="checked">
+					<label id="lbVAR34" class="varlistLabel" style="display: none;" for="opVAR34">VAR34 - Quantidade geral de postagens de um(a) aluno(a) em fóruns<br></label>
+		
+					<input name="opVAR35" id="opVAR35" class="varlistCheckbox" style="display: none;" value="VAR35" type="checkbox" checked="checked">
+					<label id="lbVAR35" class="varlistLabel" style="display: none;" for="opVAR35">VAR35 - Quantidade de respostas de um(a) professor(a) para as dúvidas de alunos(as) em fóruns<br></label>
+		
+				</div>
+			</div>
+		</nav>
+
+		<section>
+			<article>
+				<svg></svg>
+			</article>
+		</section>
+		
+
+		<footer>
+			--- Footer aqui ---
+		</footer>
+
+		<div id="simpletooltip">Teste</div>
+
+		<script type="text/javascript">	  
+
+			
+			function btFilterClick(){
+				
+				var selected_vars = getSelectedVars();
+
+				if (
+					document.getElementById("cbcurso").selectedIndex != 0 &&
+					document.getElementById("cbsemestre").selectedIndex != 0 &&
+					document.getElementById("cbperiodo").selectedIndex != 0 &&
+					document.getElementById("cbdisciplina").selectedIndex != 0 &&
+					document.getElementById("cbconstruto").selectedIndex != 0 &&
+					selected_vars != null && selected_vars.length > 1
+				){
+					var filter_options_local = {
+						curso: document.getElementById("cbcurso").value,
+						semestre: document.getElementById("cbsemestre").value,
+						periodo: document.getElementById("cbperiodo").value,
+						nome_disciplina: document.getElementById("cbdisciplina").value, 
+						variaveis: selected_vars};
+
+					console.log(filter_options_local);
+					drawGraph(filter_options_local);
+				} else {
+					alert("Preencha todos os campos do filtro e selecione pelo menos duas variáveis do construto.");
+				}
+			}
+		
+			//mostra ou esconde variaveis de acordo com o construto selecionado
+			function updateVarList(){
+				var varlist = document.getElementById("divvarlist");
+
+				switch (document.getElementById("cbconstruto").selectedOptions[0].value) {
+					case "EM": showVars(['VAR33','VAR34',,'VAR35']);
+						break;
+					case "EA": showVars(['VAR01']); //TODO problema: nunca serah plotado
+						break;
+					case "ET": showVars(['VAR12','VAR13','VAR14','VAR15','VAR16','VAR17','VAR18']);
+						break;
+					case "BA": showVars(['VAR02','VAR03','VAR04','VAR05','VAR06','VAR07','VAR08','VAR09','VAR10']);
+						break;
+					case "GT": showVars(['VAR24','VAR25','VAR28','VAR31','VAR31b','VAR31c','VAR32a','VAR32b','VAR32c','VAR32d']); 
+						break;
+					case "AA": showVars(['VAR20','VAR21','VAR22','VAR23']);
+						break;                
+				}    
+			}			
+
+			function showVars(varlist){
+				var allvars = ['VAR01','VAR02','VAR03','VAR04','VAR05','VAR06','VAR07','VAR08','VAR09','VAR10','VAR12','VAR13','VAR14','VAR15','VAR16','VAR17','VAR18','VAR19','VAR20','VAR21','VAR22','VAR23','VAR24','VAR25','VAR28','VAR29','VAR30','VAR31','VAR31b','VAR31c','VAR32a','VAR32b','VAR32c','VAR32d','VAR33','VAR34','VAR35'];				
+
+				allvars.forEach(varname => {
+					if (varlist.includes(varname)) {
+						document.getElementById("lb"+varname).style.display = "inline";
+						document.getElementById("op"+varname).style.display = "inline";
+					} else {
+						document.getElementById("lb"+varname).style.display = "none";
+						document.getElementById("op"+varname).style.display = "none";
+					}
+				});
+			}
+
+			function getSelectedVars(){
+				vardiv = document.getElementById("divvarlist");
+				selectedVars = [];
+
+				 Array.from(vardiv.children).forEach(element => {
+					if (element.id.startsWith("op") && element.style.display == "inline" && element.checked){
+						selectedVars.push(element.id.replace("op",""));
+					}
+				})
+				
+				return selectedVars;
+			}
+
+
+				/*
+					EM - Estabelecimento de Metas
+					EA - Estruturação do Ambiente
+					ET - Estratégia para realização de tarefas
+					GT - Gerenciamento do Tempo
+					BA - Busca por ajuda
+					AA - Auto avaliação
+
+
+					'VAR01','VAR02','VAR03','VAR04','VAR05','VAR06','VAR07','VAR08','VAR09','VAR10','VAR12','VAR13','VAR14','VAR15','VAR16','VAR17','VAR18','VAR19','VAR20','VAR21','VAR22','VAR23','VAR24','VAR25','VAR28','VAR29','VAR30','VAR31','VAR31b','VAR31c','VAR32a','VAR32b','VAR32c','VAR32d','VAR33','VAR34','VAR35'
+			} */
+		</script>
+	</body>
+</html>
