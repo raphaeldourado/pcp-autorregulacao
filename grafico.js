@@ -96,6 +96,12 @@ function carregarDisciplinas(){
     updateFiltersOptions('cbdisciplina');    
 }
 
+//permite trazer um objeto para o front
+d3.selection.prototype.moveToFront = function() {  
+    return this.each(function(){
+      this.parentNode.appendChild(this);
+    });
+};
 
 function drawGraph(filter_options){
 
@@ -153,12 +159,21 @@ function drawGraph(filter_options){
         .on("mousemove", function () { return d3.select("#simpletooltip").style("top", (event.pageY - 10) + "px").style("left", (event.pageX + 10) + "px"); })
         .on('mouseover', function (d) {
             d3.select(this).attr("stroke-width", "4");
-            d3.select(this).attr("stroke", "black"); //TODO terminar
+             d3.select(this).attr("stroke", function(){
+                if (setStrokeColor(d) == "red"){ //TODO procurar um jeito mais seguro de fazer isso
+                    return "#730000"; //~darkred
+                } else {
+                    return "#264662"; //~darkblue
+                }
+            }); 
+
+            d3.select(this).moveToFront();
+
             d3.select("#simpletooltip").style("visibility", "visible").text(d.nome_aluno);
         })
         .on('mouseout', function (d) {
             d3.select(this).attr("stroke-width", "1");
-            d3.select(this).attr("stroke", setStrokeColor(d)); //TODO terminar
+            d3.select(this).attr("stroke", setStrokeColor(d)); 
             d3.select("#simpletooltip").style("visibility", "hidden");
         });
 
