@@ -35,11 +35,11 @@
 			<select class="combos-filtro" name="cbconstruto" id="cbconstruto" required="required" aria-required="true" onchange="updateVarList()">
 				<option disabled selected value> -- Selecione um construto -- </option>
 				<option value="AA" id="cbconstruto-5">Auto avaliação</option>
-				<option value="GT" id="cbconstruto-4">Busca por ajuda</option>
+				<option value="BA" id="cbconstruto-4">Busca por ajuda</option>
 				<option value="EM" id="cbconstruto-0">Estabelecimento de Metas</option>
 				<option value="ET" id="cbconstruto-2">Estratégia para realização de tarefas</option>
 				<option value="EA" id="cbconstruto-1">Estruturação do Ambiente</option>
-				<option value="BA" id="cbconstruto-3">Gerenciamento do Tempo</option>
+				<option value="GT" id="cbconstruto-3">Gerenciamento do Tempo</option>
 			</select>
 			
 			<button onclick="btFilterClick()">Visualizar</button>
@@ -88,9 +88,9 @@
 					<input name="opVAR14" id="opVAR14" class="varlistCheckbox" style="display: none;" value="VAR14" type="checkbox" checked="checked">
 					<label id="lbVAR14" class="varlistLabel" style="display: none;" for="opVAR14">VAR14 - Turno do dia em que realizou mais atividades<br></label>
 		
-					<input name="opVAR15" id="opVAR15" class="varlistCheckbox" style="display: none;" value="VAR15" type="checkbox" checked="checked">
+<!-- 					<input name="opVAR15" id="opVAR15" class="varlistCheckbox" style="display: none;" value="VAR15" type="checkbox" checked="checked">
 					<label id="lbVAR15" class="varlistLabel" style="display: none;" for="opVAR15">VAR15<br></label>
-		
+ -->		
 					<input name="opVAR16" id="opVAR16" class="varlistCheckbox" style="display: none;" value="VAR16" type="checkbox" checked="checked">
 					<label id="lbVAR16" class="varlistLabel" style="display: none;" for="opVAR16">VAR16 - Quantidade de atividades entregues por um(a) aluno(a) fora do prazo, por disciplina<br></label>
 		
@@ -169,6 +169,8 @@
 				<svg></svg>
 			</article>
 		</section>
+
+		<!-- <div class="tabela-alunos" id="tabela-alunos" style="display: none;"></div> -->
 		
 		<div class="legend-row" id="legend-div" style="display: none;">
 			<div class="legend-column" style="color: red; text-align: right"><p>──────── Aluno COM risco de reprovação&nbsp;&nbsp;&nbsp;&nbsp;</p></div>
@@ -219,19 +221,19 @@
 						break;
 					case "EA": showVars(['VAR01']); //TODO problema: nunca serah plotado
 						break;
-					case "ET": showVars(['VAR12','VAR13','VAR14','VAR15','VAR16','VAR17','VAR18']);
+					case "ET": showVars(['VAR12','VAR13','VAR14',/*'VAR15',*/'VAR16','VAR17','VAR18']);
 						break;
 					case "BA": showVars(['VAR02','VAR03','VAR04','VAR05','VAR06','VAR07','VAR08','VAR09','VAR10']);
 						break;
 					case "GT": showVars(['VAR24','VAR25','VAR28','VAR31','VAR31b','VAR31c','VAR32a','VAR32b','VAR32c','VAR32d']); 
 						break;
-					case "AA": showVars(['VAR20','VAR21','VAR22','VAR23']);
+					case "AA": showVars(['VAR20','VAR21','VAR22','VAR23']); 
 						break;                
 				}    
 			}			
 
 			function showVars(varlist){
-				var allvars = ['VAR01','VAR02','VAR03','VAR04','VAR05','VAR06','VAR07','VAR08','VAR09','VAR10','VAR12','VAR13','VAR14','VAR15','VAR16','VAR17','VAR18','VAR19','VAR20','VAR21','VAR22','VAR23','VAR24','VAR25','VAR28','VAR29','VAR30','VAR31','VAR31b','VAR31c','VAR32a','VAR32b','VAR32c','VAR32d','VAR33','VAR34','VAR35'];				
+				var allvars = ['VAR01','VAR02','VAR03','VAR04','VAR05','VAR06','VAR07','VAR08','VAR09','VAR10','VAR12','VAR13','VAR14','VAR16','VAR17','VAR18','VAR19','VAR20','VAR21','VAR22','VAR23','VAR24','VAR25','VAR28','VAR29','VAR30','VAR31','VAR31b','VAR31c','VAR32a','VAR32b','VAR32c','VAR32d','VAR33','VAR34','VAR35'];				
 
 				allvars.forEach(varname => {
 					if (varlist.includes(varname)) {
@@ -267,7 +269,7 @@
 					AA - Auto avaliação
 
 
-					'VAR01','VAR02','VAR03','VAR04','VAR05','VAR06','VAR07','VAR08','VAR09','VAR10','VAR12','VAR13','VAR14','VAR15','VAR16','VAR17','VAR18','VAR19','VAR20','VAR21','VAR22','VAR23','VAR24','VAR25','VAR28','VAR29','VAR30','VAR31','VAR31b','VAR31c','VAR32a','VAR32b','VAR32c','VAR32d','VAR33','VAR34','VAR35'
+					'VAR01','VAR02','VAR03','VAR04','VAR05','VAR06','VAR07','VAR08','VAR09','VAR10','VAR12','VAR13','VAR14','VAR16','VAR17','VAR18','VAR19','VAR20','VAR21','VAR22','VAR23','VAR24','VAR25','VAR28','VAR29','VAR30','VAR31','VAR31b','VAR31c','VAR32a','VAR32b','VAR32c','VAR32d','VAR33','VAR34','VAR35'
 			} */
 		</script>
 	</body>
