@@ -5,6 +5,9 @@
 		<script src="https://d3js.org/d3.v3.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
 		
+		<script src="tabela.js"></script>
+		<script src="filtros.js"></script>
+		<script src="main.js"></script>
 		<script src="grafico.js"></script>
 
 		<link rel="stylesheet" href="style.css">
@@ -171,6 +174,13 @@
 		</section>
 
 		<!-- <div class="tabela-alunos" id="tabela-alunos" style="display: none;"></div> -->
+		<div id="div-table" style="background: #ccc; display: none;">
+			<table>
+				<tr>
+					<th>Alunos selecionados:</th>
+				</tr>
+			</table>
+		</div>		
 		
 		<div class="legend-row" id="legend-div" style="display: none;">
 			<div class="legend-column" style="color: red; text-align: right"><p>──────── Aluno COM risco de reprovação&nbsp;&nbsp;&nbsp;&nbsp;</p></div>
@@ -188,6 +198,7 @@
 			function btFilterClick(){
 				
 				var selected_vars = getSelectedVars();
+				hideTableColNames(); //esconde lista de alunos
 
 				if (
 					document.getElementById("cbcurso").selectedIndex != 0 &&
